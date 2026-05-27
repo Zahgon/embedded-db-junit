@@ -1,7 +1,6 @@
 package org.zapodot.junit.db.internal;
 
 import org.slf4j.LoggerFactory;
-
 import javax.sql.DataSource;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -22,51 +21,51 @@ public class EmbeddedDataSource implements DataSource {
     }
 
     public static EmbeddedDataSource create(final Connection connection) {
-        return new EmbeddedDataSource(connection);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Connection getConnection() {
-        return CloseSuppressedConnectionFactory.createProxy(connection);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Connection getConnection(final String username, final String password) {
-        return getConnection();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public PrintWriter getLogWriter() {
-        return new PrintWriter(new Slf4jInfoWriter(LOGGER));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void setLogWriter(final PrintWriter out) {
-        // intentionally kept empty
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void setLoginTimeout(final int seconds) {
-        // intentionally kept empty
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int getLoginTimeout() {
-        return 0;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Logger getParentLogger() {
-        return Logger.getGlobal();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public <T> T unwrap(final Class<T> iface) {
-        throw new UnsupportedOperationException("unWrap(Class) is not supported for embedded datasource");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean isWrapperFor(final Class<?> iface) {
-        return false;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

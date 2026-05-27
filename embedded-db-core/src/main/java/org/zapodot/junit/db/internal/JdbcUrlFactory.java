@@ -1,7 +1,6 @@
 package org.zapodot.junit.db.internal;
 
 import org.zapodot.junit.db.common.CompatibilityMode;
-
 import java.util.Map;
 
 public interface JdbcUrlFactory {
@@ -13,18 +12,6 @@ public interface JdbcUrlFactory {
     Map<String, String> compatibilityModeParam(final CompatibilityMode compatibilityMode);
 
     default String createJdbcUrlParameterString(final Map<String, String> properties) {
-        if (properties == null) {
-            return "";
-        }
-        final StringBuilder paramStringBuilder = new StringBuilder();
-        for (final Map.Entry<String, String> property : properties.entrySet()) {
-            if (property.getValue() != null) {
-                paramStringBuilder.append(';')
-                                  .append(property.getKey())
-                                  .append('=')
-                                  .append(property.getValue());
-            }
-        }
-        return paramStringBuilder.toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

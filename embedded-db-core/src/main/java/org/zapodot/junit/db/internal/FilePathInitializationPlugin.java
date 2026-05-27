@@ -2,7 +2,6 @@ package org.zapodot.junit.db.internal;
 
 import org.h2.store.fs.FilePath;
 import org.zapodot.junit.db.plugin.InitializationPlugin;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,23 +31,7 @@ public class FilePathInitializationPlugin implements InitializationPlugin {
 
     @Override
     public void connectionMade(final String name, final Connection connection) {
-        final FilePath filePath = FilePath.get(resource);
-        try (final InputStream inputStream = filePath.newInputStream();
-             final Statement statement = connection.createStatement();
-             final ByteArrayOutputStream out = new ByteArrayOutputStream(Math.max(32, inputStream.available()));
-        ) {
-            copyToOutputStream(inputStream, out);
-            statement.execute(convertToString(out.toByteArray()));
-
-        } catch (IOException e) {
-            throw new IllegalArgumentException(String.format("Could not read SQL from file path \"%s\"",
-                                                             filePath.getName()),
-                                               e);
-        } catch (SQLException e) {
-            throw new IllegalArgumentException(String.format("Could not run SQL script from file path \"%s\"",
-                                                             filePath.getName()), e);
-        }
-
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private String convertToString(final byte[] buffer) {
@@ -65,5 +48,4 @@ public class FilePathInitializationPlugin implements InitializationPlugin {
             out.write(buffer, 0, readInOperation);
         }
     }
-
 }

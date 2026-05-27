@@ -24,18 +24,10 @@ public class Version {
     }
 
     private Version(Properties properties) {
-        this(properties.getProperty("project.groupId"),
-             properties.getProperty("project.artifactId"),
-             properties.getProperty("project.version"),
-             properties.getProperty("git.branch"),
-             properties.getProperty("git.commit.id"));
+        this(properties.getProperty("project.groupId"), properties.getProperty("project.artifactId"), properties.getProperty("project.version"), properties.getProperty("git.branch"), properties.getProperty("git.commit.id"));
     }
 
-    private Version(final String groupId,
-                    final String artifactId,
-                    final String projectVersion,
-                    final String gitBranch,
-                    final String gitCommit) {
+    private Version(final String groupId, final String artifactId, final String projectVersion, final String gitBranch, final String gitCommit) {
         this.groupId = groupId;
         this.artifactId = artifactId;
         this.projectVersion = projectVersion;
@@ -44,23 +36,23 @@ public class Version {
     }
 
     public String getGroupId() {
-        return groupId;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getArtifactId() {
-        return artifactId;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getVersion() {
-        return projectVersion;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getGitBranch() {
-        return gitBranch;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getGitCommit() {
-        return gitCommit;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static Properties loadBuildInfoAndGitProperties() {
@@ -78,12 +70,6 @@ public class Version {
     }
 
     static Properties loadPropertiesFile(final String file) {
-        final Properties properties = new Properties();
-        try {
-            properties.load(Version.class.getResourceAsStream("/" + file));
-        } catch (IOException | NullPointerException e) {
-            throw new IllegalStateException("Could not load \"" + file + "\"", e);
-        }
-        return properties;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

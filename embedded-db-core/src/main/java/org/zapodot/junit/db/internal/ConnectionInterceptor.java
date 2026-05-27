@@ -6,7 +6,6 @@ import net.bytebuddy.implementation.bind.annotation.RuntimeType;
 import net.bytebuddy.implementation.bind.annotation.This;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.lang.reflect.Method;
 
 /**
@@ -17,25 +16,14 @@ public class ConnectionInterceptor {
     private static final Logger logger = LoggerFactory.getLogger(ConnectionInterceptor.class);
 
     private ConnectionInterceptor() {
-
     }
 
     public static void close() {
-        logger.debug("close() is suppressed");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @RuntimeType
-    public static Object intercept(@Origin(cache = true) Method method,
-                                   @This ConnectionProxy delegator,
-                                   @AllArguments Object[] arguments) throws Exception {
-        try {
-            return method.invoke(delegator.getDelegatedConnection(), arguments);
-        } catch (Exception e) {
-            if(e.getCause() instanceof Exception) {
-                throw (Exception) e.getCause();
-            } else {
-                throw e;
-            }
-        }
+    public static Object intercept(@Origin(cache = true) Method method, @This ConnectionProxy delegator, @AllArguments Object[] arguments) throws Exception {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import org.zapodot.junit.db.common.CompatibilityMode;
 import org.zapodot.junit.db.common.EmbeddedDatabaseCreator;
 import org.zapodot.junit.db.plugin.InitializationPlugin;
-
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -36,12 +35,7 @@ public abstract class EmbeddedDatabaseCreatorImpl implements EmbeddedDatabaseCre
 
     private Connection connection;
 
-    protected EmbeddedDatabaseCreatorImpl(final boolean autoCommit,
-                                        final String name,
-                                        final Map<String, String> jdbcUrlProperties,
-                                        final List<InitializationPlugin> initializationPlugins,
-                                        final JdbcUrlFactory jdbcUrlFactory,
-                                        final CompatibilityMode compatibilityMode) {
+    protected EmbeddedDatabaseCreatorImpl(final boolean autoCommit, final String name, final Map<String, String> jdbcUrlProperties, final List<InitializationPlugin> initializationPlugins, final JdbcUrlFactory jdbcUrlFactory, final CompatibilityMode compatibilityMode) {
         this.autoCommit = autoCommit;
         this.predefinedName = name;
         this.jdbcUrlProperties = jdbcUrlProperties == null ? Collections.emptyMap() : jdbcUrlProperties;
@@ -57,7 +51,7 @@ public abstract class EmbeddedDatabaseCreatorImpl implements EmbeddedDatabaseCre
      */
     @Override
     public Connection getConnection() {
-        return CloseSuppressedConnectionFactory.createProxy(connection);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -67,14 +61,13 @@ public abstract class EmbeddedDatabaseCreatorImpl implements EmbeddedDatabaseCre
      */
     @Override
     public DataSource getDataSource() {
-        return EmbeddedDataSource.create(connection);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean isAutoCommit() {
-        return autoCommit;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 
     /**
      * Returns a JDBC url for connecting to the in-memory database created by this rule with all INIT params stripped
@@ -83,7 +76,7 @@ public abstract class EmbeddedDatabaseCreatorImpl implements EmbeddedDatabaseCre
      */
     @Override
     public String getConnectionJdbcUrl() {
-        return jdbcUrlFactory.connectionUrl(getInMemoryDatabaseName(), getJdbcUrlProperties());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private String getInMemoryDatabaseName() {
@@ -98,26 +91,11 @@ public abstract class EmbeddedDatabaseCreatorImpl implements EmbeddedDatabaseCre
     }
 
     protected void setupConnection(final String name) throws SQLException {
-
-        testName = name;
-        final String url = generateJdbcUrl();
-        try {
-            connection = DriverManager.getConnection(url);
-        } catch (JdbcSQLException e) {
-            if (url.contains("RUNSCRIPT")) {
-                LOGGER.error("Failed to initialize the H2 database. Please check your init script for errors", e);
-            }
-            throw e;
-        }
-        connection.setAutoCommit(isAutoCommit());
-        for (InitializationPlugin entry : initializationPlugins) {
-            entry.connectionMade(name, getConnection());
-            connection.setAutoCommit(isAutoCommit());
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected void takeDownConnection() throws SQLException {
-        this.connection.close();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private String generateJdbcUrl() {

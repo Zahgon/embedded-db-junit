@@ -11,7 +11,6 @@ import org.zapodot.junit.db.internal.AbstractEmbeddedDatabaseCreatorBuilder;
 import org.zapodot.junit.db.internal.EmbeddedDatabaseCreatorImpl;
 import org.zapodot.junit.db.internal.JdbcUrlFactory;
 import org.zapodot.junit.db.plugin.InitializationPlugin;
-
 import java.util.List;
 import java.util.Map;
 
@@ -24,8 +23,6 @@ public class EmbeddedDatabaseRule extends EmbeddedDatabaseCreatorImpl implements
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EmbeddedDatabaseRule.class);
 
-
-
     /**
      * Standard constructor that is suitable if you don't need to do anything special
      */
@@ -33,13 +30,7 @@ public class EmbeddedDatabaseRule extends EmbeddedDatabaseCreatorImpl implements
         this(true, null, null, null, null, CompatibilityMode.REGULAR);
     }
 
-
-    private EmbeddedDatabaseRule(final boolean autoCommit,
-                                 final String name,
-                                 final Map<String, String> jdbcUrlProperties,
-                                 final List<InitializationPlugin> initializationPlugins,
-                                 final JdbcUrlFactory jdbcUrlFactory,
-                                 final CompatibilityMode compatibilityMode) {
+    private EmbeddedDatabaseRule(final boolean autoCommit, final String name, final Map<String, String> jdbcUrlProperties, final List<InitializationPlugin> initializationPlugins, final JdbcUrlFactory jdbcUrlFactory, final CompatibilityMode compatibilityMode) {
         super(autoCommit, name, jdbcUrlProperties, initializationPlugins, jdbcUrlFactory, compatibilityMode);
     }
 
@@ -49,7 +40,7 @@ public class EmbeddedDatabaseRule extends EmbeddedDatabaseCreatorImpl implements
      * @return a Builder
      */
     public static Builder builder() {
-        return h2();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -58,7 +49,7 @@ public class EmbeddedDatabaseRule extends EmbeddedDatabaseCreatorImpl implements
      * @return a {@link Builder} instance
      */
     public static Builder h2() {
-        return Builder.h2();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -67,52 +58,38 @@ public class EmbeddedDatabaseRule extends EmbeddedDatabaseCreatorImpl implements
      * @return a {@link Builder} instance
      */
     public static Builder hsqldb() {
-        return Builder.hsqldb();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
-
 
     @Override
     public Statement apply(final Statement base, final Description description) {
-        warnIfNameIsPredifinedAndTheRuleIsMethodBased(description);
-        return statement(base, predefinedName != null ? predefinedName : extractNameFromDescription(description));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private void warnIfNameIsPredifinedAndTheRuleIsMethodBased(final Description description) {
         if (description.getMethodName() != null && predefinedName != null) {
-            LOGGER.warn(
-                    "You have set a name for your datasource and are running the EmbeddedDatabaseRule as a method @Rule. " +
-                            "This may lead to the datasource not being reset between tests especially of your tests uses runs with " +
-                            "multiple threads");
+            LOGGER.warn("You have set a name for your datasource and are running the EmbeddedDatabaseRule as a method @Rule. " + "This may lead to the datasource not being reset between tests especially of your tests uses runs with " + "multiple threads");
         }
     }
 
     private String extractNameFromDescription(Description description) {
-        return description.getTestClass() == null ? description.getClassName() : description.getTestClass()
-                                                                                            .getSimpleName();
+        return description.getTestClass() == null ? description.getClassName() : description.getTestClass().getSimpleName();
     }
-
 
     private Statement statement(final Statement base, final String name) {
         return new Statement() {
+
             @Override
             public void evaluate() throws Throwable {
-                setupConnection(name);
-                try {
-                    base.evaluate();
-                } finally {
-                    takeDownConnection();
-                }
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
         };
     }
-
 
     /**
      * A builder class that provides a fluent api for building DB rules
      */
     public static class Builder extends AbstractEmbeddedDatabaseCreatorBuilder<EmbeddedDatabaseRule> {
-
 
         private Builder(final Engine engine) {
             super(engine);
@@ -135,9 +112,8 @@ public class EmbeddedDatabaseRule extends EmbeddedDatabaseCreatorImpl implements
          * @return a builder for creating an {@link EmbeddedDatabaseRule} that will use the H2 engine
          */
         public static Builder h2() {
-            return new Builder(Engine.H2);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
-
 
         /**
          * Creates a builder for the H2 engine
@@ -145,19 +121,12 @@ public class EmbeddedDatabaseRule extends EmbeddedDatabaseCreatorImpl implements
          * @return a builder for creating an {@link EmbeddedDatabaseRule} that will use the HSQLDB engine
          */
         public static Builder hsqldb() {
-            return new Builder(Engine.HSQLDB);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public EmbeddedDatabaseRule build() {
-            return new EmbeddedDatabaseRule(autoCommit,
-                                            name,
-                                            propertiesMap(),
-                                            initializationPlugins,
-                                            createJdbcUrlFactory(),
-                                            compatibilityMode);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
-
-
 }

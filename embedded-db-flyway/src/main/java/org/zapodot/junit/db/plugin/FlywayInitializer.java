@@ -7,7 +7,6 @@ import org.flywaydb.core.api.configuration.FluentConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zapodot.junit.db.internal.EmbeddedDataSource;
-
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.util.Map;
@@ -26,18 +25,15 @@ public class FlywayInitializer implements InitializationPlugin {
         private final FluentConfiguration fluentConfiguration = Flyway.configure();
 
         public Builder() {
-            fluentConfiguration.encoding(StandardCharsets.UTF_8.name())
-                               .target(MigrationVersion.LATEST);
+            fluentConfiguration.encoding(StandardCharsets.UTF_8.name()).target(MigrationVersion.LATEST);
         }
 
         public Builder withInstalledBy(final String installedBy) {
-            fluentConfiguration.installedBy(installedBy);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder withAllowMixed() {
-            fluentConfiguration.mixed(true);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -56,63 +52,52 @@ public class FlywayInitializer implements InitializationPlugin {
          * @return builder instance
          */
         public Builder withIgnoreMigrationPatterns(String... patterns) {
-            fluentConfiguration.ignoreMigrationPatterns(patterns);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
-
         public Builder withDoNotValidateOnMigrate() {
-            fluentConfiguration.validateOnMigrate(false);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder withLocations(final String... locations) {
-            fluentConfiguration.locations(locations);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder withEncoding(final String encoding) {
-            fluentConfiguration.encoding(encoding);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder withSchemas(final String... schemas) {
-            fluentConfiguration.schemas(schemas);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder withTable(final String table) {
-            fluentConfiguration.table(table);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder withPlaceholders(final Map<String, String> placeholders) {
-            fluentConfiguration.placeholders(placeholders);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder withPlaceholderPrefix(final String placeholderPrefix) {
-            fluentConfiguration.placeholderPrefix(placeholderPrefix);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder withPlaceholderSuffix(final String placeholderSuffix) {
-            fluentConfiguration.placeholderSuffix(placeholderSuffix);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder withTarget(final String targetVersion) {
-            fluentConfiguration.target(targetVersion);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public FlywayInitializer build() {
-            return new FlywayInitializer(fluentConfiguration);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
     public static Builder builder() {
-        return new FlywayInitializer.Builder();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private FlywayInitializer(final FluentConfiguration flywayConfiguration) {
@@ -121,13 +106,10 @@ public class FlywayInitializer implements InitializationPlugin {
 
     @Override
     public void connectionMade(final String name, final Connection connection) {
-        LOGGER.debug("Initiating Flyway migration");
-        final Flyway flyway = new Flyway(flywayConfiguration.dataSource(EmbeddedDataSource.create(connection)));
-        flyway.migrate();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     Configuration getFlywayConfiguration() {
-        return flywayConfiguration;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

@@ -10,7 +10,6 @@ import liquibase.exception.DatabaseException;
 import liquibase.exception.LiquibaseException;
 import liquibase.resource.ClassLoaderResourceAccessor;
 import liquibase.resource.ResourceAccessor;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -42,6 +41,7 @@ public class LiquibaseInitializer implements InitializationPlugin {
     private final String defaultSchemaName;
 
     public static class Builder {
+
         private String databaseChangeLog;
 
         private ResourceAccessor resourceAccessor;
@@ -63,9 +63,7 @@ public class LiquibaseInitializer implements InitializationPlugin {
          * @return the same builder
          */
         public Builder withChangelogResource(final String resource) {
-            this.databaseChangeLog = resource;
-            this.resourceAccessor = new ClassLoaderResourceAccessor();
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -75,8 +73,7 @@ public class LiquibaseInitializer implements InitializationPlugin {
          * @return the same builder
          */
         public Builder limitChanges(Integer limit) {
-            this.changesToApply = limit;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -89,10 +86,7 @@ public class LiquibaseInitializer implements InitializationPlugin {
          * @see <a href="http://www.liquibase.org/documentation/contexts.html">Liquibase Contexts documentation</a>
          */
         public Builder withContexts(final String... contexts) {
-            if (contexts != null) {
-                this.contexts.addAll(Arrays.asList(contexts));
-            }
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -101,8 +95,7 @@ public class LiquibaseInitializer implements InitializationPlugin {
          * @return the same builder instance
          */
         public Builder addDatabaseNameToContext() {
-            this.addNameToContext = true;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -112,10 +105,7 @@ public class LiquibaseInitializer implements InitializationPlugin {
          * @return the same builder instance
          */
         public Builder withLabels(final String... labels) {
-            if (labels != null) {
-                this.labels.addAll(Arrays.asList(labels));
-            }
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -123,8 +113,7 @@ public class LiquibaseInitializer implements InitializationPlugin {
          * creation (if not exists) on startup.
          */
         public Builder withDefaultSchemaName(String schemaName) {
-            this.defaultSchemaName = schemaName;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -133,24 +122,7 @@ public class LiquibaseInitializer implements InitializationPlugin {
          * @return a LiqubaseInitializer instance to be used with the EmbeddedDatabaseRule
          */
         public LiquibaseInitializer build() {
-            if (databaseChangeLog == null) {
-                throw new IllegalArgumentException(
-                        "You must provide a changelog file to the LiquibaseIntitializer Plugin builder");
-            }
-            try {
-                if (resourceAccessor.openStream(null, databaseChangeLog) == null) {
-                    throw new IllegalArgumentException(String.format(
-                            "Can not load changelog from resource \"%s\". Does it exist?",
-                            databaseChangeLog));
-                }
-            } catch (IOException e) {
-                throw new IllegalArgumentException(String.format(
-                        "An IO exception occurred while loading changelog from resource \"%s\"",
-                        databaseChangeLog), e);
-            }
-            return new LiquibaseInitializer(createContexts(), createLabels(), databaseChangeLog,
-                                            resourceAccessor, changesToApply, addNameToContext,
-                                            defaultSchemaName);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         private LabelExpression createLabels() {
@@ -158,18 +130,11 @@ public class LiquibaseInitializer implements InitializationPlugin {
         }
 
         private Contexts createContexts() {
-
             return new Contexts(contexts);
         }
     }
 
-    private LiquibaseInitializer(final Contexts contexts,
-                                 final LabelExpression labelExpression,
-                                 final String changeLog,
-                                 final ResourceAccessor resourceAccessor,
-                                 final Integer changesLimit,
-                                 final boolean addDbNameToContext,
-                                 final String defaultSchemaName) {
+    private LiquibaseInitializer(final Contexts contexts, final LabelExpression labelExpression, final String changeLog, final ResourceAccessor resourceAccessor, final Integer changesLimit, final boolean addDbNameToContext, final String defaultSchemaName) {
         this.contexts = contexts;
         this.labelExpression = labelExpression;
         this.changeLog = changeLog;
@@ -181,30 +146,7 @@ public class LiquibaseInitializer implements InitializationPlugin {
 
     @Override
     public void connectionMade(final String name, final Connection connection) {
-        if (defaultSchemaName != null) {
-            try (final Statement statement = connection.createStatement()) {
-                statement.execute(String.format("CREATE SCHEMA IF NOT EXISTS %s", defaultSchemaName));
-                if(! connection.getAutoCommit()) {
-                    connection.commit();
-                }
-            } catch (SQLException e) {
-                throw new IllegalStateException("Could not create schema \"" + defaultSchemaName + "\"", e);
-            }
-        }
-
-        final Liquibase liquibase = createLiquibase(connection);
-        if (addDbNameToContext) {
-            contexts.add(name);
-        }
-        try {
-            if (changesLimit == null) {
-                liquibase.update(contexts, labelExpression);
-            } else {
-                liquibase.update(changesLimit, contexts, labelExpression);
-            }
-        } catch (LiquibaseException e) {
-            throw new IllegalArgumentException("An exception occurred while applying Liquibase changesets", e);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private Liquibase createLiquibase(final Connection connection) {
@@ -231,9 +173,6 @@ public class LiquibaseInitializer implements InitializationPlugin {
      * @return a new {@link Builder}
      */
     public static Builder builder() {
-        return new Builder();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
-
 }
-

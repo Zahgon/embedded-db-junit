@@ -5,12 +5,10 @@ import net.bytebuddy.description.modifier.Visibility;
 import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
 import net.bytebuddy.implementation.FieldAccessor;
 import net.bytebuddy.implementation.MethodDelegation;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.util.Objects;
-
 import static net.bytebuddy.matcher.ElementMatchers.any;
 
 /**
@@ -22,21 +20,7 @@ public class CloseSuppressedConnectionFactory {
     private CloseSuppressedConnectionFactory() {
     }
 
-    private static final Class<? extends Connection> proxyType = new ByteBuddy().subclass(Connection.class)
-                                                                                .method(any())
-                                                                                .intercept(MethodDelegation.to(
-                                                                                        ConnectionInterceptor.class))
-                                                                                .defineField("delegatedConnection",
-                                                                                             Connection.class,
-                                                                                             Visibility.PRIVATE)
-                                                                                .implement(ConnectionProxy.class)
-                                                                                .intercept(FieldAccessor
-                                                                                                   .ofBeanProperty())
-                                                                                .make()
-                                                                                .load(CloseSuppressedConnectionFactory.class
-                                                                                              .getClassLoader(),
-                                                                                      ClassLoadingStrategy.Default.WRAPPER)
-                                                                                .getLoaded();
+    private static final Class<? extends Connection> proxyType = new ByteBuddy().subclass(Connection.class).method(any()).intercept(MethodDelegation.to(ConnectionInterceptor.class)).defineField("delegatedConnection", Connection.class, Visibility.PRIVATE).implement(ConnectionProxy.class).intercept(FieldAccessor.ofBeanProperty()).make().load(CloseSuppressedConnectionFactory.class.getClassLoader(), ClassLoadingStrategy.Default.WRAPPER).getLoaded();
 
     /**
      * Create a proxy that delegates to the provided Connection except for calls to "close()" which will be suppressed.
@@ -45,9 +29,7 @@ public class CloseSuppressedConnectionFactory {
      * @return a Connection proxy
      */
     public static Connection createProxy(final Connection connection) {
-        Objects.requireNonNull(connection, "The \"connection\" argument can not be null");
-        return (Connection) createConnectionProxy(connection);
-
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static ConnectionProxy createConnectionProxy(final Connection connection) {
